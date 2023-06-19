@@ -140,10 +140,7 @@ public class Main extends WindowAdapter implements ActionListener {
 				System.out.println("로그인이 되었습니다!");
 				tfMsg.setText("로그인이 되었습니다!");
 
-				fMain = new JFrame("메인프레임");
-				fMain.setBounds(200, 200, 200, 200);
-				fMain.addWindowListener(this);
-				fMain.setVisible(true);
+				new MainMenu();
 			} else {
 				System.out.println("다시 입력하세요.");
 				tfMsg.setText("다시 입력하세요.");
@@ -151,16 +148,6 @@ public class Main extends WindowAdapter implements ActionListener {
 		} else {
 			tfMsg.setText("ID가 틀렸습니다. 다시 입력하세요.");
 		}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 	}

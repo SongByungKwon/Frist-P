@@ -5,8 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -28,12 +28,18 @@ public class SignUp extends JDialog{
 	 private JLabel pwlabel = new JLabel("비밀번호");
 	 private JLabel numlabel = new JLabel("고유번호");
 	 private JLabel pwChecklabel = new JLabel("비밀번호 확인");
+	 private MemberDAO dao = new MemberDAO() ;
+	 private boolean idchek= false;
+	 private String number ="87184898";
+	 
 	 
 	
 	  
-	 private boolean membershipProgress = false;//회원가입 때 true로 변환 될 예정;
+	 
 
 	 public SignUp() {
+		 
+		 
 		
 	
 	
@@ -81,12 +87,16 @@ public class SignUp extends JDialog{
 
 		FocusEvent();
 		checkValue();
+		idcheck();//중복 체크
+		
 		
 	}
 	 
 	 
 	 
 	 
+	 
+	
 	 //텍스트 필드에 있는 값을 체크하고 지우기 위한 메소드
 	 private void FocusEvent() {
 			idText.addFocusListener(new FocusListener() {
@@ -116,6 +126,8 @@ public class SignUp extends JDialog{
 				}
 			});
 			
+
+			
 	
 			
 	
@@ -123,7 +135,37 @@ public class SignUp extends JDialog{
 
 
 	 }
+	 private void idcheck() {
+		 bidtest.addActionListener(new ActionListener() {
+			 public void actionPerformed(ActionEvent e) {
+				 
+				 String strId =idText.getText();
+				 
+				 ArrayList<MemberVo> list =dao.list(strId);
+				 
+		
+				 
+				
+				 if(list.size()==0) {
+					 JOptionPane.showMessageDialog(null,"동일한 아이디가 없습니다.","다음으로",JOptionPane.WARNING_MESSAGE);
+					 idchek = true;
+					 return;
+					 
+				 }
+				 else {
+					 JOptionPane.showMessageDialog(null,"중복된 아이디가 있습니다.","다음으로",JOptionPane.WARNING_MESSAGE);
+					 idchek = false;
+					 return;
+				 }
+			 }
+			 
+		 });
+		 
+	 }
+	 
 
+		
+	
 	 
 	 
 	 //회원 가입할때 모든 값이 입력되었는지 체크하기 위한 메소드
@@ -133,8 +175,11 @@ public class SignUp extends JDialog{
 				if(idText.getText().trim().length()==0 || idText.getText().trim().equals("아이디")) {
 					JOptionPane.showMessageDialog(null, "아이디를 입력해 주세요.", "아이디 입력", JOptionPane.WARNING_MESSAGE);
 					idText.grabFocus();
+					
 					return;
 				}
+			
+				
 				
 				if(pwText.getText().trim().length()==0) {
 					JOptionPane.showMessageDialog(null, "비밀번호를 입력해 주세요.", "비밀번호 입력", JOptionPane.WARNING_MESSAGE);
@@ -158,47 +203,37 @@ public class SignUp extends JDialog{
 					numText.grabFocus();
 					return;
 				}
-			
 				
 				
-                /** 컴퓨터 C드라이브에 java_member 폴더 만들고 member.txt 파일 만드시면 됩니다. **/
-				//회원가입시 텍스트 파일을 하나 만들어서 아이디와 비번을 저장 하자. 한줄 뛰고 아이디|비밀번호 텍스트 파일에 차곡 차곡 저장하기~ | 는 아이디랑 패스워드 구분하기 위해 사용
-				String txt = idText.getText()+"|"+pwText.getText();
-				txt+="\n";
 				
-				String fileName = "C:\\java_member\\member.txt" ;
+				String nnumText=numText.getText();
 				
-				
-				try{
-					BufferedWriter fw = new BufferedWriter(new FileWriter(fileName, true));
-					
-					// 파일안에 문자열 쓰기
-					fw.write(txt);
-					fw.flush();
-
-					// 객체 닫기
-					fw.close();					
-					
-				}catch(Exception errmsg){
-					errmsg.printStackTrace();
-				}
-				
-				
-				//여기까지 왔다면 모든 값을 입력하고 선택하는 것이 완료되었으니 회원가입 과정이 완료.				
-				membershipProgress = true;				
-				
-				JOptionPane.showMessageDialog(null, "회원 가입이 완료 되었습니다.","회원 가입 완료.", JOptionPane.WARNING_MESSAGE);
-								
-				setVisible(false);
+			if(nnumText.equals(number)&&idchek==true) {
+				dao.insertForStatement(idText.getText(),pwText.getText());
 			}
-		});
+			else if(!nnumText.equals(number)){
+				JOptionPane.showMessageDialog(null, "고유번호가 다릅니다.", "고유번호 재입력", JOptionPane.WARNING_MESSAGE);
+				numText.grabFocus();
+				return;
+			}
+			else if(idchek==false){
+				JOptionPane.showMessageDialog(null, "중복된 아이디가 있습니다.", "중복된 아이디", JOptionPane.WARNING_MESSAGE);
+				numText.grabFocus();
+				return;
+			}
+				
+		
+				
+				
+				}
+			
+			
+		
+		 });
 	 }
 	 
 	 
 
-	 
-	 
-	 
 	 
 	 
 	 
@@ -221,11 +256,9 @@ public class SignUp extends JDialog{
 	}
 
 
-
-	public boolean memberCheck() {
-		return membershipProgress;
-	}
-	 
+	
 	 
 	 
 }
+
+

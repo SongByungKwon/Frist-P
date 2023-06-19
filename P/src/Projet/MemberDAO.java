@@ -3,8 +3,11 @@ package Projet;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+
 
 public class MemberDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -67,4 +70,43 @@ public class MemberDAO {
 	}
 	
 	
-}
+	
+	public  void insertForStatement(String ID,String PASSWORD) {
+		 try {
+	         Class.forName(driver);
+	         System.out.println("jdbc driver loading success.");
+	         Connection conn = DriverManager.getConnection(url, user, password);
+	         System.out.println("oracle connection success.\n");
+	         Statement stmt = conn.createStatement();
+	         
+	         
+	         String sql2 = "INSERT INTO ZOOLOGIN VALUES ('" +ID + "','" + PASSWORD + "')";
+	         System.out.println(sql2);
+	         
+	        
+	         
+	        boolean b =stmt.execute(sql2);
+	        if (!b) {
+	            System.out.println("Insert success.\n");
+	         } else {
+	            System.out.println("Insert fail.\n");
+	         }
+
+	     
+
+
+	      } catch (ClassNotFoundException e) {
+	         System.out.println(e);
+	      } catch (SQLException e) {
+	         System.out.println(e);
+	      }
+
+	   }
+
+	
+		
+		
+	}
+	
+
+	
