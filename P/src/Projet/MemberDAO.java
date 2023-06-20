@@ -18,6 +18,18 @@ public class MemberDAO {
 	private Connection con;
 	private Statement stmt;
 	private ResultSet rs;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public ArrayList<MemberVo> list(String id) {
 		ArrayList<MemberVo> list = new ArrayList<MemberVo>();
@@ -102,11 +114,39 @@ public class MemberDAO {
 	      }
 
 	   }
-
 	
+	public void Filein(String image_id,String image_data,String image_kind,String image_line)  {
+			 try {
+		         Class.forName(driver);
+		         System.out.println("jdbc driver loading success.");
+		         Connection conn = DriverManager.getConnection(url, user, password);
+		         System.out.println("oracle connection success.\n");
+		         Statement stmt = conn.createStatement();
+		         
+		         
+		         String sql2 = "INSERT INTO images VALUES ('" +image_id + "','" + image_data + "','"+image_kind+"','"+image_line+"')";
+		         
+		         System.out.println(sql2);
+		         
+		        
+		         
+		        boolean b =stmt.execute(sql2);
+		        if (!b) {
+		            System.out.println("Insert success.\n");
+		         } else {
+		            System.out.println("Insert fail.\n");
+		         }
+
+		     
+
+
+		      } catch (ClassNotFoundException e) {
+		         System.out.println(e);
+		      } catch (SQLException e) {
+		         System.out.println(e);
+		      }
+
+		   }
 		
 		
 	}
-	
-
-	

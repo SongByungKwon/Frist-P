@@ -17,7 +17,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class SignUp extends JDialog{
-	 private JPanel sp = new JPanel(new GridLayout(9, 0));
+	private static final long serialVersionUID = 1L;
+	private JPanel sp = new JPanel(new GridLayout(9, 0));
 	 private JTextField idText = new JTextField("아이디");
 	 private JButton bidtest = new JButton("종복");
 	 private JPasswordField pwText = new JPasswordField();
@@ -29,6 +30,7 @@ public class SignUp extends JDialog{
 	 private JLabel numlabel = new JLabel("고유번호");
 	 private JLabel pwChecklabel = new JLabel("비밀번호 확인");
 	 private MemberDAO dao = new MemberDAO() ;
+	
 	 private boolean idchek= false;
 	 private String number ="87184898";
 	 
@@ -163,6 +165,8 @@ public class SignUp extends JDialog{
 		 
 	 }
 	 
+	 
+	 
 
 		
 	
@@ -171,6 +175,7 @@ public class SignUp extends JDialog{
 	 //회원 가입할때 모든 값이 입력되었는지 체크하기 위한 메소드
 	 private void checkValue(){
 		 signUpbtn.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				if(idText.getText().trim().length()==0 || idText.getText().trim().equals("아이디")) {
 					JOptionPane.showMessageDialog(null, "아이디를 입력해 주세요.", "아이디 입력", JOptionPane.WARNING_MESSAGE);
@@ -206,10 +211,15 @@ public class SignUp extends JDialog{
 				
 				
 				
+				
 				String nnumText=numText.getText();
 				
 			if(nnumText.equals(number)&&idchek==true) {
 				dao.insertForStatement(idText.getText(),pwText.getText());
+				JOptionPane.showMessageDialog(null, "환영합니다.", "환영합니다.", JOptionPane.WARNING_MESSAGE);
+				numText.grabFocus();
+				
+				
 			}
 			else if(!nnumText.equals(number)){
 				JOptionPane.showMessageDialog(null, "고유번호가 다릅니다.", "고유번호 재입력", JOptionPane.WARNING_MESSAGE);
@@ -243,10 +253,12 @@ public class SignUp extends JDialog{
 		return this.idText.getText().trim();
 	}
 
+	@SuppressWarnings("deprecation")
 	public String getPwText() {
 		return this.pwText.getText().trim();
 	}
 
+	@SuppressWarnings("deprecation")
 	public String getPwCheckText() {
 		return this.pwCheckText.getText().trim();
 	}

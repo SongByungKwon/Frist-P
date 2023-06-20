@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 
 
 public class Main extends WindowAdapter implements ActionListener {
-	private JFrame f, fMain;
+	private JFrame f;
 	private TextField tfId, tfPwd, tfMsg;
 	private Button bLogin , bmember;
 	private MemberDAO dao;
@@ -33,15 +33,15 @@ public class Main extends WindowAdapter implements ActionListener {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//CLOSE
 		
 		
-//		//이미지 넣기-----------------------------
-//		try {
-//			f.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("C:\\Users\\Class01\\Desktop\\main.jpg")))));
-//			}catch(IOException e) {
-//				e.printStackTrace();
-//			}
-//		f.pack();
-//		//이미지 넣기 완----------------------
-//		
+		//이미지 넣기-----------------------------
+		try {
+			f.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("C:\\Users\\Class01\\Desktop\\main.jpg")))));
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		f.pack();
+		//이미지 넣기 완----------------------
+		
 		
 	
 
@@ -139,8 +139,8 @@ public class Main extends WindowAdapter implements ActionListener {
 			if (tfPwd.getText().equals(pwd)) {
 				System.out.println("로그인이 되었습니다!");
 				tfMsg.setText("로그인이 되었습니다!");
-
 				new MainMenu();
+				f.dispose();
 			} else {
 				System.out.println("다시 입력하세요.");
 				tfMsg.setText("다시 입력하세요.");

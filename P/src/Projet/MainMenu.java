@@ -7,8 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public class MainMenu extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private JFrame f;
 	private JButton bs, bsub,bc;
+	 private Memberch ch =new Memberch();
    
 
 	public MainMenu() {
@@ -49,10 +51,15 @@ public class MainMenu extends JFrame {
 		bs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Click!");
+				f.dispose();
+				ch.Search();
+				
 			}
 		});
    		
    	}
+	
+	
 	
 	private void buttoncelsius() {
 		bsub.addActionListener(new ActionListener() {
