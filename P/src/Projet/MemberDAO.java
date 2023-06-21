@@ -59,6 +59,8 @@ public class MemberDAO {
 
 					MemberVo data = new MemberVo(sh, Password);
 					list.add(data);
+					
+					
 				}
 			}
 		} catch (Exception e) {
@@ -82,6 +84,87 @@ public class MemberDAO {
 	}
 	
 	
+	public ArrayList<MemberVo> listname(String image_id) {
+		ArrayList<MemberVo> listname = new ArrayList<MemberVo>();
+
+		try {
+			connDB();
+
+			String query = "SELECT * FROM IMAGES ";
+			System.out.print(query);
+			if (image_id != null) {
+				query += " where image_id =TRIM('" + image_id + "')";
+			}
+
+			System.out.println("SQL : " + query);
+			rs = stmt.executeQuery(query);
+			rs.last();
+			System.out.println("rs.getRow() : " + rs.getRow());
+
+			if (rs.getRow() == 0) {
+				System.out.println("0 row selected...");
+			} else {
+				System.out.println(rs.getRow() + " rows selected...");
+				rs.previous();
+//				rs.first();
+				while (rs.next()) {
+					String sh = rs.getString("image_id");
+					String idata = rs.getString("image_data");
+					String kind = rs.getString("image_kind");
+					String line = rs.getString("image_line");
+
+					MemberVo data = new MemberVo(sh,idata ,kind ,line);
+					
+					listname.add(data);
+			
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return listname;
+	}
+
+	public void connDB1() {
+		try {
+			Class.forName(driver);
+			System.out.println("jdbc driver loading success.");
+			con = DriverManager.getConnection(url, user, password);
+			System.out.println("oracle connection success.");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			System.out.println("statement create success.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public  void insertForStatement(String ID,String PASSWORD) {
 		 try {
@@ -91,8 +174,8 @@ public class MemberDAO {
 	         System.out.println("oracle connection success.\n");
 	         Statement stmt = conn.createStatement();
 	         
-	         
-	         String sql2 = "INSERT INTO ZOOLOGIN VALUES ('" +ID + "','" + PASSWORD + "')";
+		         
+		         String sql2 = "INSERT INTO ZOOLOGIN VALUES ('" +ID + "','" + PASSWORD + "')";
 	         System.out.println(sql2);
 	         
 	        
@@ -114,6 +197,86 @@ public class MemberDAO {
 	      }
 
 	   }
+	
+	public  void correction(String line) {
+		 try {
+	         Class.forName(driver);
+	         System.out.println("jdbc driver loading success.");
+	         Connection conn = DriverManager.getConnection(url, user, password);
+	         System.out.println("oracle connection success.\n");
+	         Statement stmt = conn.createStatement();
+	         
+	         
+	         String sql2 = "UPDATE  images SET image_line = '" +line + "'";
+	         System.out.println(sql2);
+	         
+	        
+	         
+	        boolean b =stmt.execute(sql2);
+	        if (!b) {
+	            System.out.println("Insert success.\n");
+	         } else {
+	            System.out.println("Insert fail.\n");
+	         }
+
+	     
+
+
+	      } catch (ClassNotFoundException e) {
+	         System.out.println(e);
+	      } catch (SQLException e) {
+	         System.out.println(e);
+	      }
+
+	   }
+	
+	
+	
+	public  void del(String delt) {
+		 try {
+	         Class.forName(driver);
+	         System.out.println("jdbc driver loading success.");
+	         Connection conn = DriverManager.getConnection(url, user, password);
+	         System.out.println("oracle connection success.\n");
+	         Statement stmt = conn.createStatement();
+	         
+	         
+	         String sql2 = "DELETE FROM  images WHERE image_ID = '" +delt + "'";
+	         System.out.println(sql2);
+	         
+	        
+	         
+	        boolean b =stmt.execute(sql2);
+	        if (!b) {
+	            System.out.println("Insert success.\n");
+	         } else {
+	            System.out.println("Insert fail.\n");
+	         }
+
+	     
+
+
+	      } catch (ClassNotFoundException e) {
+	         System.out.println(e);
+	      } catch (SQLException e) {
+	         System.out.println(e);
+	      }
+
+	   }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public void Filein(String image_id,String image_data,String image_kind,String image_line)  {
 			 try {

@@ -4,20 +4,24 @@ import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Memberch {
 	private JFrame fm,fsech ,fpush;
 	private TextField Textch;
-	private JButton bSearch,bIcon,bIcon1,bsub,bpush;
+	private JButton bSearch,bIcon,bIcon1,bsub,bpush,  badd,bdel;
 	private TextField Tname,Tse,Tin,Tqpqp  , Taname,Tase,Taqpqp;
-	private JLabel Lname,Lse,Lin,Lqpqp , Laname,Lase,Laqpqp   ; 
+	private JLabel Lname,Lse,Lin,Lqpqp , Laname,Lase,Laqpqp ; 
 	 private MemberDAO dao = new MemberDAO() ;
+	 
+	 private String image_id,image_data, image_kind, image_line;
 	
 	
 	
@@ -66,15 +70,53 @@ public class Memberch {
 		fm.add(bIcon);
 		
 		
-		
-		
 		fm.setVisible(true);
+		
+		
 		
 		bSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Test");
-				SearchFrame();
-				fm.dispose();
+				
+					System.out.println("Click!");
+					System.out.println(Textch.getText());
+
+					String strId = Textch.getText();
+
+					ArrayList<MemberVo> listname = dao.listname(strId);
+
+					System.out.println("list.size() : " + listname.size());
+					if (listname.size() == 1) {
+						MemberVo name = (MemberVo) listname.get(0);
+						String image_id = name.getname();
+						String image_data = name.getdata();
+						String image_kind = name.getkind();
+						String image_line = name.getline();
+						
+
+						System.out.println("DB ==> " + image_id+" : "+image_data+" : "+image_kind+" : "+image_line);
+						SearchFrame(image_id ,image_data, image_kind, image_line);
+						fm.dispose();
+
+					}
+					 else {
+						 JOptionPane.showMessageDialog(null,"없는 이름입니다..","확인 부탁",JOptionPane.WARNING_MESSAGE);
+					}
+				
+
+				
+			
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				
 				
 
@@ -157,7 +199,13 @@ public class Memberch {
 	
 	
 	
-	public void SearchFrame() {
+	public void SearchFrame(String image_id,String image_data,String image_kind,String image_line) {
+		this.image_id=image_id;
+		this.image_data=image_data;
+		this.image_kind=image_kind;
+		this.image_line=image_line;
+		
+		
 		fsech = new JFrame("검색창");
 		fsech.setSize(800,800);
 		fsech.setLocation(500,10);
@@ -169,28 +217,50 @@ public class Memberch {
 		
 		
 		Laname =new JLabel("이름 : ");
-		Laname.setBounds(200, 130, 100, 40);
-		Taname = new TextField();
+		Laname.setBounds(240, 130, 50, 40);
+		Taname = new TextField(image_id);
 		Taname.setBounds(300, 130, 190, 40);
+		Taname.setEditable(false);
 		
 		
 		Lase =new JLabel("종류 : ");
-		Lase.setBounds(200, 220, 100, 40);
-		Tase = new TextField();
+		Lase.setBounds(240, 220, 50, 40);
+		Tase = new TextField(image_data);
 		Tase.setBounds(300, 220, 190, 40);
+		Tase.setEditable(false);
+		
+		
+		
+		JLabel lblImage = new JLabel();
+		lblImage.setBounds(10, 50, 200, 200);
+
+		lblImage.setIcon(new ImageIcon(image_kind)); // index 처음 0, IMAGES[0] 랑 결과 같음
+		fsech.getContentPane().add(lblImage);   
 		
 	
 		
 		
 		Laqpqp =new JLabel("특이사항 : ");
-		Laqpqp.setBounds(200, 300, 100, 40);
-		Taqpqp = new TextField();
-		Taqpqp.setBounds(300, 300, 300, 400);
+		Laqpqp.setBounds(220, 300, 70, 40);
+		Taqpqp = new TextField(image_line);
+		Taqpqp.setBounds(300, 300, 300, 300);
+		
+		
+		
+		
 		
 		bIcon1 = new JButton();
 		bIcon1.setIcon(logoIcon);
 		bIcon1.setBounds(300, 10, 200, 100);
 		bIcon1.setContentAreaFilled(false);
+		
+		badd=new JButton("수정");
+		badd.setBounds(310,650,100,100);
+		bdel=new JButton("삭제");
+		bdel.setBounds(450,650,100,100);
+		
+		
+		
 		
 		
 		fsech.add(Laname);
@@ -201,6 +271,46 @@ public class Memberch {
 		fsech.add(Tase);
 		fsech.add(Taqpqp);
 		fsech.add(bIcon1);
+		
+		fsech.add(badd);
+		fsech.add(bdel);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		badd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+						String Tadd =Taqpqp.getText();
+				dao.correction(Tadd);
+				JOptionPane.showMessageDialog(null, "추가 되었습니다.", "추가", JOptionPane.WARNING_MESSAGE);
+				 }
+			});
+		
+		
+		
+		bdel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String Tdel =Taname.getText();
+				dao.del(Tdel);
+				JOptionPane.showMessageDialog(null, "정삭적으로 삭제 되었습니다.", "삭제", JOptionPane.WARNING_MESSAGE);
+				
+			}
+		});
+	
+		
+
+		
+		
 		
 		
 		bIcon1.addActionListener(new ActionListener() {

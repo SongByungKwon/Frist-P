@@ -74,6 +74,7 @@ public class MainMenu extends JFrame {
 		bc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Click!");
+//				new Clac();
 			}
 		});
 		
