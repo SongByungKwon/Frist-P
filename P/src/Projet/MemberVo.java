@@ -11,6 +11,9 @@ private String image_line;
 private String calc_y;
 private String calc_m;
 private String calc_d;
+private String titel;
+private String contents;
+
 	public MemberVo() {
 		
 	}
@@ -54,10 +57,12 @@ private String calc_d;
 		}
 	
 	
-	public MemberVo(String calc_y,String calc_m,String calc_d) {
+	public MemberVo(String calc_y,String calc_m,String calc_d,String titel,String contents) {
 		this.calc_y=calc_y;
 		this.calc_m =calc_m;
 		this.calc_d =calc_d;
+		this.titel =titel;
+		this.contents =contents;
 	}
 	
 	public String getcalc_y() 
@@ -73,6 +78,16 @@ private String calc_d;
 	public String getcalc_d() 
 	{
 		return calc_d;
+		}
+	
+	public String getcalc_t() 
+	{
+		return titel;
+		}
+	
+	public String getcalc_c() 
+	{
+		return contents;
 		}
 	
 

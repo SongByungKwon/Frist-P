@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 
 public class clac extends JFrame  implements ActionListener{
 	private MemberDAO dao = new MemberDAO() ;
+	int Sz=40;
 	//North
 
 	JPanel topPane = new JPanel();
@@ -336,13 +337,28 @@ public class clac extends JFrame  implements ActionListener{
 							 
 							 if(listcalc.size()==0) {
 								 JOptionPane.showMessageDialog(null,"해당 날짜에 일정이 없습니다.","다음으로",JOptionPane.WARNING_MESSAGE);
-								 return;
+								 
 								 
 							 }
 							 else {
+								 JFrame fse = new JFrame("일정찾기");
+								 fse.setSize(400,500);
+								 fse.setLocation(800,0);
+								 fse.setLayout(null);
+								 fse.addWindowListener(null); 
+								 JButton contens[]= new JButton[listcalc.size()];
+								 for(int i=0;i<listcalc.size();i++) {
+									 
+									 contens[i] =new JButton("일정"+"["+i+1+"]");
+									 
+									 contens[i].setBounds(100, Sz, 200, 40);
+									 fse.add(contens[i]);
+									 Sz=Sz+80;
+									 
+								 }
 								 
 
-								 return;
+								 fse.setVisible(true);
 							 }
 						}
 					});

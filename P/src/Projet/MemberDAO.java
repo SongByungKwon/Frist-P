@@ -152,7 +152,7 @@ public class MemberDAO {
 			String query = "SELECT * FROM ZooCale ";
 			System.out.print(query);
 			if (calc_d != null) {
-				query += " where dd =TRIM('" + calc_d + "')";
+				query += " where   dd =TRIM('" + calc_d + "') AND mm=TRIM('"+ calc_m + "')";
 			}
 
 			System.out.println("SQL : " + query);
@@ -167,12 +167,15 @@ public class MemberDAO {
 				rs.previous();
 //				rs.first();
 				while (rs.next()) {
-					String sh = rs.getString("calc_y");
-					String idata = rs.getString("calc_m");
-					String kind = rs.getString("calc_d");
+					String yy = rs.getString("yy");
+					String mm = rs.getString("mm");
+					String dd = rs.getString("dd");
+					
+					String titel = rs.getString("titel");
+					String contents = rs.getString("contents");
 					
 
-					MemberVo data = new MemberVo(calc_y,calc_m ,calc_d);
+					MemberVo data = new MemberVo(yy,mm ,dd,titel,contents);
 					
 					listcalc.add(data);
 			
