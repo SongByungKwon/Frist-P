@@ -7,6 +7,10 @@ private String image_id;
 private String image_data;
 private String image_kind;
 private String image_line;
+
+private String calc_y;
+private String calc_m;
+private String calc_d;
 	public MemberVo() {
 		
 	}
@@ -49,6 +53,27 @@ private String image_line;
 		return image_line;
 		}
 	
-
+	
+	public MemberVo(String calc_y,String calc_m,String calc_d) {
+		this.calc_y=calc_y;
+		this.calc_m =calc_m;
+		this.calc_d =calc_d;
+	}
+	
+	public String getcalc_y() 
+	{
+		return calc_y;
+		}
+	
+	public String getcalc_m() 
+	{
+		return calc_m;
+		}
+	
+	public String getcalc_d() 
+	{
+		return calc_d;
+		}
+	
 
 }
