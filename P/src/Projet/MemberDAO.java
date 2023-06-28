@@ -143,16 +143,17 @@ public class MemberDAO {
 	
 	
 	
-	public ArrayList<MemberVo> listcalc(String calc_y,String calc_m,String calc_d) {
+	
+	
+	public ArrayList<MemberVo> listcalc(String calc_y,String calc_m,String calc_d,String time) {
 		ArrayList<MemberVo> listcalc = new ArrayList<MemberVo>();
-
 		try {
 			connDB3();
 
 			String query = "SELECT * FROM ZooCale ";
 			System.out.print(query);
 			if (calc_d != null) {
-				query += " where   dd =TRIM('" + calc_d + "') AND mm=TRIM('"+ calc_m + "')";
+				query += " where   dd =TRIM('" + calc_d + "') AND mm=TRIM('"+ calc_m + "')AND TIME=TRIM('"+ time + "')";
 			}
 
 			System.out.println("SQL : " + query);
@@ -164,18 +165,19 @@ public class MemberDAO {
 				System.out.println("0 row selected...");
 			} else {
 				System.out.println(rs.getRow() + " rows selected...");
-				rs.previous();
-//				rs.first();
+//				rs.previous();
+				rs.beforeFirst();
 				while (rs.next()) {
 					String yy = rs.getString("yy");
 					String mm = rs.getString("mm");
 					String dd = rs.getString("dd");
+					String timeget1=rs.getString("TIME");
 					
 					String titel = rs.getString("titel");
 					String contents = rs.getString("contents");
 					
 
-					MemberVo data = new MemberVo(yy,mm ,dd,titel,contents);
+					MemberVo data = new MemberVo(yy,mm ,dd,titel,timeget1,contents);
 					
 					listcalc.add(data);
 			
@@ -187,6 +189,7 @@ public class MemberDAO {
 
 		return listcalc;
 	}
+	
 
 	public void connDB3() {
 		try {
@@ -200,6 +203,21 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+
+	
+	
+	
+	
+	
+
+	
+	
+
+	
+	
 	
 
 	
@@ -376,4 +394,123 @@ public class MemberDAO {
 		   }
 		
 		
-	}
+	
+
+
+
+
+public  void timein(String yy,String mm,String dd, String time,String inday,String conin) {
+	 try {
+        Class.forName(driver);
+        System.out.println("jdbc driver loading success.");
+        Connection conn = DriverManager.getConnection(url, user, password);
+        System.out.println("oracle connection success.\n");
+        Statement stmt = conn.createStatement();
+        
+        
+        String sql2 = "UPDATE  zoocale SET YY='" +yy + "',MM='" +mm + "',DD='" +dd + "',TIME='" +time + "',TITEL='" +inday + "',contents='" +conin+ "'";
+        System.out.println(sql2);
+        
+       
+        
+       boolean b =stmt.execute(sql2);
+       if (!b) {
+           System.out.println("Insert success.\n");
+        } else {
+           System.out.println("Insert fail.\n");
+        }
+
+    
+
+
+     } catch (ClassNotFoundException e) {
+        System.out.println(e);
+     } catch (SQLException e) {
+        System.out.println(e);
+     }
+
+  }
+
+
+
+public  void deltcal(String delt) {
+	 try {
+        Class.forName(driver);
+        System.out.println("jdbc driver loading success.");
+        Connection conn = DriverManager.getConnection(url, user, password);
+        System.out.println("oracle connection success.\n");
+        Statement stmt = conn.createStatement();
+        
+        
+        String sql2 = "DELETE FROM  zoocale WHERE titel = '" +delt + "'";
+        System.out.println(sql2);
+        
+       
+        
+       boolean b =stmt.execute(sql2);
+       if (!b) {
+           System.out.println("Insert success.\n");
+        } else {
+           System.out.println("Insert fail.\n");
+        }
+
+    
+
+
+     } catch (ClassNotFoundException e) {
+        System.out.println(e);
+     } catch (SQLException e) {
+        System.out.println(e);
+     }
+
+  }
+
+
+
+
+
+public  void insult(String yy,String mm,String dd, String time,String inday,String conin) {
+	 try {
+       Class.forName(driver);
+       System.out.println("jdbc driver loading success.");
+       Connection conn = DriverManager.getConnection(url, user, password);
+       System.out.println("oracle connection success.\n");
+       Statement stmt = conn.createStatement();
+       
+       
+       String sql2 = " INSERT INTO zoocale VALUES ('" +yy + "','" + mm + "','"+dd+"','"+time+"','"+inday+"','"+conin+"')";
+       System.out.println(sql2);
+       
+      
+       
+      boolean b =stmt.execute(sql2);
+      if (!b) {
+          System.out.println("Insert success.\n");
+       } else {
+          System.out.println("Insert fail.\n");
+       }
+
+   
+
+
+    } catch (ClassNotFoundException e) {
+       System.out.println(e);
+    } catch (SQLException e) {
+       System.out.println(e);
+    }
+
+ }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

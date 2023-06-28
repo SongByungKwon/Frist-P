@@ -2,14 +2,19 @@ package Projet;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class MainMenu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JFrame f;
-	private JButton bs, bsub,bc;
+	private JButton bs,bc;
 	 private Memberch ch =new Memberch();
    
 
@@ -21,18 +26,33 @@ public class MainMenu extends JFrame {
        f.addWindowListener(null);
        
        bs = new JButton("동물 검색");
-   	bsub = new JButton("온도측정");
+   
    	bc  = new JButton("일정");
    	
-   	bs.setBounds(0, 0, 300, 100);
-   	bsub.setBounds(300, 0, 300, 100);
-	bc.setBounds(600, 0, 300, 100);
+   	bs.setBounds(250, 300, 450, 100);
+   	
+   
+
+   	bs.setBorderPainted(false);
+   	
+	bc.setBounds(250, 500, 450, 100);
+	
+
+
+	bc.setBorderPainted(false);
+	
+ 	try {
+		f.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("C:\\Users\\Class01\\Desktop\\Mainmenu.jpg")))));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	f.pack();
    	
    	f.setVisible(true);
    	f.add(bs);
-   	f.add(bsub);
-   	f.add(bc);
    
+   	f.add(bc);
+  
    	
    	
    	
@@ -40,7 +60,6 @@ public class MainMenu extends JFrame {
    	
    	
 	buttonsearch();
-	buttoncelsius();
 	buttonschedule();
     }
     
@@ -61,14 +80,6 @@ public class MainMenu extends JFrame {
 	
 	
 	
-	private void buttoncelsius() {
-		bsub.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Click!");
-			}
-		});
-		
-	}
 	
 	private void buttonschedule() {
 		bc.addActionListener(new ActionListener() {

@@ -8,11 +8,14 @@ private String image_data;
 private String image_kind;
 private String image_line;
 
+
 private String calc_y;
 private String calc_m;
 private String calc_d;
 private String titel;
 private String contents;
+private String gettime;
+
 
 	public MemberVo() {
 		
@@ -57,13 +60,19 @@ private String contents;
 		}
 	
 	
-	public MemberVo(String calc_y,String calc_m,String calc_d,String titel,String contents) {
+	public MemberVo(String calc_y,String calc_m,String calc_d,String titel,String time,String contents) {
+	
 		this.calc_y=calc_y;
 		this.calc_m =calc_m;
 		this.calc_d =calc_d;
 		this.titel =titel;
+		this.gettime =time;
 		this.contents =contents;
 	}
+	
+	
+
+	
 	
 	public String getcalc_y() 
 	{
@@ -80,15 +89,20 @@ private String contents;
 		return calc_d;
 		}
 	
-	public String getcalc_t() 
+	public String gettitel() 
 	{
 		return titel;
 		}
 	
-	public String getcalc_c() 
+	public String getcontents() 
 	{
 		return contents;
 		}
+	public String gettime() 
+	{
+		return gettime;
+		}
 	
+
 
 }
