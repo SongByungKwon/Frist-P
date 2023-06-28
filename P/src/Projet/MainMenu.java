@@ -14,8 +14,10 @@ import javax.swing.JLabel;
 public class MainMenu extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JFrame f;
-	private JButton bs,bc;
+	private JButton bs,bc,bd;
 	 private Memberch ch =new Memberch();
+	 private stuff st =new stuff();
+	
    
 
 	public MainMenu() {
@@ -28,16 +30,20 @@ public class MainMenu extends JFrame {
        bs = new JButton("동물 검색");
    
    	bc  = new JButton("일정");
+   	bd = new JButton("재고");
    	
-   	bs.setBounds(250, 300, 450, 100);
+   	
+   	bs.setBounds(250, 250, 450, 100);
+	bs.setBorderPainted(false);
+   	
+   	bd.setBounds(250, 400, 450, 100);
+   	bd.setBorderPainted(false);
    	
    
 
-   	bs.setBorderPainted(false);
+   
    	
-	bc.setBounds(250, 500, 450, 100);
-	
-
+	bc.setBounds(250, 550, 450, 100);
 
 	bc.setBorderPainted(false);
 	
@@ -50,6 +56,7 @@ public class MainMenu extends JFrame {
    	
    	f.setVisible(true);
    	f.add(bs);
+   	f.add(bd);
    
    	f.add(bc);
   
@@ -61,6 +68,7 @@ public class MainMenu extends JFrame {
    	
 	buttonsearch();
 	buttonschedule();
+	buttonsstuf() ;
     }
     
     	
@@ -77,6 +85,16 @@ public class MainMenu extends JFrame {
 		});
    		
    	}
+	private void buttonsstuf() {
+		bd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Click");
+				f.dispose();
+				st.stuff();
+			
+			}
+		});
+	}
 	
 	
 	

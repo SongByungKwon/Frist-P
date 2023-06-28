@@ -326,16 +326,13 @@ public class clac extends JFrame implements ActionListener {
 
 								JLabel schedule = new JLabel("날짜");
 								schedule.setBounds(40, 50, 40, 40);
-//								TextField Tscheduley = new TextField();
-								JComboBox Tscheduley = new JComboBox(yearModel);
+								TextField Tscheduley = new TextField();
 								Tscheduley.setBounds(100, 50, 50, 40);
 
-//								TextField Tschedulem = new TextField();
-								JComboBox Tschedulem = new JComboBox(monthModel);
+								TextField Tschedulem = new TextField();
 								Tschedulem.setBounds(150, 50, 50, 40);
 
-//								TextField Tscheduled = new TextField();
-								JComboBox Tscheduled = new JComboBox(DayCombo1);
+								TextField Tscheduled = new TextField();
 								Tscheduled.setBounds(200, 50, 50, 40);
 
 								JLabel days = new JLabel("제목");
@@ -389,13 +386,13 @@ public class clac extends JFrame implements ActionListener {
 
 										}
 										else {
-											String yy=Tscheduley.getText();
+											String yy= Tscheduley.getText();
 											String mm=Tschedulem.getText();
 											String dd=Tscheduled.getText();
 											String time=(String) straCombo.getSelectedItem();
 											String days=Tdays.getText();
-											String Tcontens=Tcontens.Tcontens();
-											dao.insult(yy, mm, dd, time, days, Tcontens);
+											String Tcontens1=Tcontens.getText();
+											dao.insult(yy, mm, dd, time, days, Tcontens1);
 										}
 										
 									}
