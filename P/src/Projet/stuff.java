@@ -27,13 +27,7 @@ public class stuff {
 	int size = 75;
 
 	public void makePanel() {
-		p = new Panel();
-		p.setBounds(150, 150, 700, 700);
-		p.setLayout(null);
-		
-		p.setVisible(true);
-		p.setBackground(Color.red);
-		f.add(p);
+	
 	}
 	
 	public void stuff() {
@@ -58,6 +52,14 @@ public class stuff {
 //		p = new Panel();
 //		p.setBounds(150, 150, 700, 700);
 //		p.setLayout(null);
+		
+		p = new Panel();
+		p.setBounds(150, 150, 700, 700);
+		p.setLayout(null);
+		
+		p.setVisible(true);
+//		p.setBackground(Color.red);
+		f.add(p);
 
 		
 
@@ -88,8 +90,6 @@ public class stuff {
 				String name = (String) kind.getSelectedItem();
 
 				if (name.equals("호랑이")) {
-//					f.dispose();
-//					f.setVisible(true);
 
 					makePanel();
 					
@@ -126,8 +126,7 @@ public class stuff {
 
 				
 				} else if (name.equals("사자")) {
-//					f.dispose();
-//					f.setVisible(true);
+
 					makePanel();
 					
 					size = 75;
