@@ -17,6 +17,8 @@ private String contents;
 private String gettime;
 
 
+
+
 	public MemberVo() {
 		
 	}
@@ -74,6 +76,9 @@ private String gettime;
 
 	
 	
+
+	
+	
 	public String getcalc_y() 
 	{
 		return calc_y;
@@ -102,6 +107,7 @@ private String gettime;
 	{
 		return gettime;
 		}
+	
 	
 
 
