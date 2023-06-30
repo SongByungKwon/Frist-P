@@ -1,6 +1,5 @@
 package Projet;
 
-import java.awt.Color;
 import java.awt.Panel;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -14,19 +13,25 @@ import javax.swing.JFrame;
 
 public class stuff {
 	private JFrame f;
-	private Panel p;
 	private ImageIcon logoIcon;
 	private JButton bIcon,button;
 	private JComboBox kind;
-	TextField fieldtitl;
-	TextField fieldcon;
+	
 
 	MemberDAO dao = new MemberDAO();
-
+	static sutffLi li = new sutffLi();
+	static stuffTi ti = new stuffTi();
+	static stuffEi ei = new stuffEi();
+	static stuffGi gi = new stuffGi();
+	static stuffri ri= new stuffri();
+	static stuffmi mi= new stuffmi();
+	
+	
 	String kindch[] = { " ", "호랑이", "사자", "코끼리", "기린", "토끼", "원숭이" };
 	int size = 75;
 
 	public void makePanel() {
+		
 	
 	}
 	
@@ -48,18 +53,7 @@ public class stuff {
 		kind = new JComboBox(kindch);
 		kind.setBounds(10, 10, 100, 50);
 		
-		makePanel();
-//		p = new Panel();
-//		p.setBounds(150, 150, 700, 700);
-//		p.setLayout(null);
-		
-		p = new Panel();
-		p.setBounds(150, 150, 700, 700);
-		p.setLayout(null);
-		
-		p.setVisible(true);
-//		p.setBackground(Color.red);
-		f.add(p);
+
 
 		
 
@@ -90,189 +84,60 @@ public class stuff {
 				String name = (String) kind.getSelectedItem();
 
 				if (name.equals("호랑이")) {
-
-					makePanel();
-					
-					
-					
-					size = 75;
 					
 					ArrayList<stuffVo> stuff = dao.stuff(name);
-
-					System.out.println("stuff.size() : " + stuff.size());
-					for (int i = 0; i < stuff.size(); i++) {
-						stuffVo v = stuff.get(i);
-						
-						fieldtitl = new TextField(v.getstuff_item());
-						fieldtitl.setBounds(25, size, 100, 50);
-						fieldcon = new TextField(v.getstuff_number());
-						fieldcon.setBounds(125, size, 200, 50);
-						size = size + 50;
-
-						p.add(fieldtitl);
-						p.add(fieldcon);
-						fieldtitl.setEnabled(false);
-						fieldcon.setEnabled(false);
+					int Tinmber = stuff.size();
+					ti.stuffTi(Tinmber,name);
+					f.dispose();
 					
-						
-						
-						
-						
-						
-					}
-
+					
+					
+				
 					
 
 
 				
 				} else if (name.equals("사자")) {
 
-					makePanel();
-					
-					size = 75;
-					
 					ArrayList<stuffVo> stuff = dao.stuff(name);
+					int linmber = stuff.size();
+					li.suffLi(linmber,name);
+					f.dispose();
 					
 					
-					
-					
-					
-
-					System.out.println("stuff.size() : " + stuff.size());
-					for (int i = 0; i < stuff.size(); i++) {
-						stuffVo v = stuff.get(i);
-						
-						fieldtitl = new TextField(v.getstuff_item());
-						fieldtitl.setBounds(25, size, 100, 50);
-						fieldcon = new TextField(v.getstuff_number());
-						fieldcon.setBounds(125, size, 200, 50);
-						size = size + 50;
-
-						p.add(fieldtitl);
-						p.add(fieldcon);
-						fieldtitl.setEnabled(false);
-						fieldcon.setEnabled(false);
-						
-						
-					}
-
 				} else if (name.equals("코끼리")) {
-//					f.dispose();
-//					f.setVisible(true);
-					
-					size = 75;
-					
-					
-					
-					
-					
-					
+//					
 					ArrayList<stuffVo> stuff = dao.stuff(name);
+					int Einmber = stuff.size();
+					ei.stuffEi(Einmber,name);
+					f.dispose();
+					
+					
+					
+					
+					
+					
 
-					System.out.println("stuff.size() : " + stuff.size());
-					for (int i = 0; i < stuff.size(); i++) {
-						stuffVo v = stuff.get(i);
-						
-						fieldtitl = new TextField(v.getstuff_item());
-						fieldtitl.setBounds(25, size, 100, 50);
-						fieldcon = new TextField(v.getstuff_number());
-						fieldcon.setBounds(125, size, 200, 50);
-						size = size + 50;
-
-						p.add(fieldtitl);
-						p.add(fieldcon);
-						fieldtitl.setEnabled(false);
-						fieldcon.setEnabled(false);
-						
-						
-						
-					}
 
 				} else if (name.equals("기린")) {
-					size = 75;
+					ArrayList<stuffVo> stuff = dao.stuff(name);
+					int Ginmber = stuff.size();
+					gi.stuffGi(Ginmber,name);
 					f.dispose();
-					f.setVisible(true);
 				
 					
-					
-					
-					
-					ArrayList<stuffVo> stuff = dao.stuff(name);
-
-					System.out.println("stuff.size() : " + stuff.size());
-					for (int i = 0; i < stuff.size(); i++) {
-						stuffVo v = stuff.get(i);
-						
-						fieldtitl = new TextField(v.getstuff_item());
-						fieldtitl.setBounds(25, size, 100, 50);
-						fieldcon = new TextField(v.getstuff_number());
-						fieldcon.setBounds(125, size, 200, 50);
-						size = size + 50;
-
-						p.add(fieldtitl);
-						p.add(fieldcon);
-						fieldtitl.setEnabled(false);
-						fieldcon.setEnabled(false);
-						
-						
-						
-					}
 
 				} else if (name.equals("토끼")) {
-					size = 75;
-					
-					
-					
-					
-					
-					
-					
-					
-					
 					ArrayList<stuffVo> stuff = dao.stuff(name);
-
-					System.out.println("stuff.size() : " + stuff.size());
-					for (int i = 0; i < stuff.size(); i++) {
-						stuffVo v = stuff.get(i);
-						
-						fieldtitl = new TextField(v.getstuff_item());
-						fieldtitl.setBounds(25, size, 100, 50);
-						fieldcon = new TextField(v.getstuff_number());
-						fieldcon.setBounds(125, size, 200, 50);
-						size = size + 50;
-
-						p.add(fieldtitl);
-						p.add(fieldcon);
-						fieldtitl.setEnabled(false);
-						fieldcon.setEnabled(false);
-						
-					
-					}
-
-				} else if (name.equals("원숭이")) {
+					int Rinmber = stuff.size();
+					ri.stuffRi(Rinmber,name);
 					f.dispose();
-					f.setVisible(true);
-					size = 75;
-					
-					
-					
+				
+				} else if (name.equals("원숭이")) {
 					ArrayList<stuffVo> stuff = dao.stuff(name);
-
-					System.out.println("stuff.size() : " + stuff.size());
-					for (int i = 0; i < stuff.size(); i++) {
-						stuffVo v = stuff.get(i);
-						
-						fieldtitl = new TextField(v.getstuff_item());
-						fieldtitl.setBounds(25, size, 100, 50);
-						fieldcon = new TextField(v.getstuff_number());
-						fieldcon.setBounds(125, size, 200, 50);
-						size = size + 50;
-						
-						p.add(fieldtitl);
-						p.add(fieldcon);
-						fieldtitl.setEnabled(false);
-						fieldcon.setEnabled(false);		
-					}
+					int Minmber = stuff.size();
+					mi.stuffMi(Minmber,name);
+					f.dispose();
 				} else {
 					
 
